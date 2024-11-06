@@ -271,3 +271,13 @@ class Sequence:
             steppos.append(pos)
         return steppos, stepheights
 
+    def GetFirstStepHeightDistn(self,ConfCut):
+        stepheights=[]
+        steppos=[]
+        for spot in range(0,len(self.Found)):
+            brightnesstrace=self.GetTimeSeq(spot)
+            Locs, Steps,Conf=self.StepMetric(brightnesstrace)
+            i=np.argwhere(Conf>ConfCut)[0]
+            stepheights.append(Steps[i])
+            steppos.append(Locs[i])
+        return steppos, stepheights
